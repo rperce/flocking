@@ -113,7 +113,7 @@ input {
   width: fill-parent;
   margin: none; }
 
-.labeled-box {
+.labeled-box, .slider-box {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-flex;
@@ -151,5 +151,13 @@ input {
 
 .spacer {
   width: 10px; }
+
+.slider-box .range {
+  width: 100px; }
+.slider-box .number {
+  width: 40px; }
+
+#addrem, #addremcontrols {
+  display: none; }
 
 /*# sourceMappingURL=theme.css.map */

@@ -22,8 +22,8 @@ class Bird
         p = world.params
         shouldSeparateFrom = (bird) =>
             return false if bird == this
-            return bird.pos.distance(@pos) <= p.separation_dist and
-                p.front_angle < @pos.angleTo(bird.pos) < 180 - p.back_angle
+            return bird.pos.distance(@pos) <= p.view_distance #and
+                #p.front_angle < @pos.angleTo(bird.pos) < 180 - p.back_angle
         separable = world.birds.filter(shouldSeparateFrom)
         return new Vector(0,0) if separable.length == 0
         out = separable.map((b) -> b.pos).reduce( ((v1, v2) =>
@@ -34,8 +34,8 @@ class Bird
         p = world.params
         couldAlignWith = (bird) =>
             return false if bird == this
-            return bird.pos.distance(@pos) <= world.params.separation_dist and
-                p.front_angle < @pos.angleTo(bird.pos) < 180 - p.back_angle
+            return bird.pos.distance(@pos) <= world.params.view_distance #and
+                #p.front_angle < @pos.angleTo(bird.pos) < 180 - p.back_angle
         aligns = world.birds.filter(couldAlignWith)
         len = aligns.length
         return new Vector(0,0) if aligns.length == 0
@@ -46,6 +46,7 @@ class Bird
         heap = new Heap(world.birds.slice(0), ((a,b)=> @pos.distance(a.pos) > @pos.distance(b.pos)))
         cohesions = (heap.pop() for i in [0...Math.min(heap.tree.length, world.params.cohesion_num)])
         len = cohesions.length
+        return new Vector(0,0) if cohesions.length == 0
         return cohesions.map((b) -> b.pos).reduce((v1, v2) ->
             v1.plus(v2.mult(1/len))).minus(@pos).scale()
     flipAtWall: (vec) ->
@@ -72,13 +73,13 @@ class World
             speed: 2
             front_angle: 0
             back_angle: 0
-            separation_dist: 100 # pixels
-            alignment_dist: 100 # pixels
+            view_distance: 300 # pixels
             cohesion_num: 7 # neighbors considered
-            separation_str: 1 # mult
-            alignment_str: 1/500 # mult
-            cohesion_str: 1/50 # mult
+            cohesion_str: 0.1 # mult
+            alignment_str: 0.1 # mult
+            separation_str: 0.1 # mult
             fear_str: 1 # mult
+            play: true
     step: ->
         @birds = @birds.map ((bird) =>
             next = bird.nextPos(this)
@@ -102,6 +103,6 @@ class World
             ctx.lineTo(Math.round(x0 + x * cos - y * sin), Math.round(y0 + x * sin + y * cos))
             ctx.lineTo(Math.round(x0 + x * cos + y * sin), Math.round(y0 + y * cos - x * sin))
             ctx.fill()))
-        window.requestAnimationFrame(this.draw)
+        window.requestAnimationFrame(this.draw) if @params.play
 
 module.exports.World = World

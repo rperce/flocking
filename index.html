@@ -43,20 +43,38 @@
                             <input type="number" min="1" max="10" step="1" value="1"
                             id="amount"></input>
                         </div>
-                        <div class="labeled-box">
-                            <label for="heading">Heading:</label>
-                            <input type="number" min="0" max="360" step="45" value="0"
-                            id="heading"></input>
-                        </div>
-                        <div class="labeled-box" id="random-container">
-                            <label for="random">Random heading?</label>
-                            <input type="checkbox" value="random" id="random"></input>
-                        </div>
                     </div>
                 </div>
             </div>
-            <div class="controls" id="fov">fov</div>
-            <div class="controls" id="sliders">sliders</div>
+            <div class="controls" id="fov"></div>
+            <div class="controls" id="sliders">
+                <label for="cohesion-slide">Cohesion:</label>
+                <div class="slider-box">
+                    <input type="range" min="0" max="0.2" step="0.0005"
+                        id="cohesion-slide" class="range"></input>
+                    <span class="spacer"></span>
+                    <input type="number" min="0" max="0.2" step="0.0005"
+                        id="cohesion-box" class="number"></input>
+                </div>
+
+                <label for="separation-slide">Separation:</label>
+                <div class="slider-box">
+                    <input type="range" min="0" max="0.2" step="0.0005"
+                        id="separation-slide" class="range"></input>
+                    <span class="spacer"></span>
+                    <input type="number" min="0" max="0.2" step="0.0005"
+                        id="separation-box" class="number"></input>
+                </div>
+
+                <label for="alignment-slide">Alignment:</label>
+                <div class="slider-box">
+                    <input type="range" min="0" max="0.2" step="0.0005"
+                        id="alignment-slide" class="range"></input>
+                    <span class="spacer"></span>
+                    <input type="number" min="0" max="0.2" step="0.0005"
+                        id="alignment-box" class="number"></input>
+                </div>
+            </div>
         </div>
     </div>
 </body>

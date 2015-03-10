@@ -78,11 +78,10 @@
       p = world.params;
       shouldSeparateFrom = (function(_this) {
         return function(bird) {
-          var ref;
           if (bird === _this) {
             return false;
           }
-          return bird.pos.distance(_this.pos) <= p.separation_dist && (p.front_angle < (ref = _this.pos.angleTo(bird.pos)) && ref < 180 - p.back_angle);
+          return bird.pos.distance(_this.pos) <= p.view_distance;
         };
       })(this);
       separable = world.birds.filter(shouldSeparateFrom);
@@ -107,11 +106,10 @@
       p = world.params;
       couldAlignWith = (function(_this) {
         return function(bird) {
-          var ref;
           if (bird === _this) {
             return false;
           }
-          return bird.pos.distance(_this.pos) <= world.params.separation_dist && (p.front_angle < (ref = _this.pos.angleTo(bird.pos)) && ref < 180 - p.back_angle);
+          return bird.pos.distance(_this.pos) <= world.params.view_distance;
         };
       })(this);
       aligns = world.birds.filter(couldAlignWith);
@@ -145,6 +143,9 @@
         return results;
       })();
       len = cohesions.length;
+      if (cohesions.length === 0) {
+        return new Vector(0, 0);
+      }
       return cohesions.map(function(b) {
         return b.pos;
       }).reduce(function(v1, v2) {
@@ -191,13 +192,13 @@
         speed: 2,
         front_angle: 0,
         back_angle: 0,
-        separation_dist: 100,
-        alignment_dist: 100,
+        view_distance: 300,
         cohesion_num: 7,
-        separation_str: 1,
-        alignment_str: 1 / 500,
-        cohesion_str: 1 / 50,
-        fear_str: 1
+        cohesion_str: 0.1,
+        alignment_str: 0.1,
+        separation_str: 0.1,
+        fear_str: 1,
+        play: true
       };
     }
 
@@ -235,7 +236,9 @@
         ctx.lineTo(Math.round(x0 + x * cos + y * sin), Math.round(y0 + y * cos - x * sin));
         return ctx.fill();
       }));
-      return window.requestAnimationFrame(this.draw);
+      if (this.params.play) {
+        return window.requestAnimationFrame(this.draw);
+      }
     };
 
     return World;

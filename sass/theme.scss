@@ -70,7 +70,7 @@ input {
     width: fill-parent;
     margin: none;
 }
-.labeled-box {
+.labeled-box, .slider-box {
     @include flexbox;
     @include flex-dir(row);
 }
@@ -84,4 +84,16 @@ input {
 }
 .spacer {
     width: 10px;
+}
+
+.slider-box {
+    .range {
+        width: 100px;
+    }
+    .number {
+        width: 40px;
+    }
+}
+#addrem, #addremcontrols {
+    display: none;
 }
