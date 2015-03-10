@@ -1,0 +1,87 @@
+@import "_flex.scss";
+@mixin center($dir) {
+    @include flexbox;
+    @include flex-dir($dir);
+    @include justify-content(center);
+}
+@mixin border-radius($amt) {
+    -webkit-border-radius: $amt;
+       -moz-border-radius: $amt;
+        -ms-border-radius: $amt;
+            border-radius: $amt;
+}
+* {
+    box-sizing: border-box;
+}
+h1 {
+    margin: auto;
+}
+body {
+    @include flexbox;
+    @include flex-dir(column);
+    @include align-items(center);
+    width: 800px;
+    height: auto;
+    margin: 15px auto 15px auto;
+}
+#app {
+    @include flexbox;
+    @include border-radius(6px);
+    border: 1px solid black;
+    width: 800px;
+    height: auto;
+
+}
+#draw {
+    width: 600px;
+    height: 600px;
+}
+#sidebar {
+    @include flexbox;
+    @include flex-dir(column);
+    width: 200px;
+    border-left: 1px solid black;
+}
+.controls {
+    @include flexbox;
+    @include flex-dir(column);
+    padding: 10px;
+    height: 200px;
+    .fa {
+        cursor: pointer;
+    }
+}
+
+label {
+    width: 80px;
+}
+#random-container {
+    @include flexbox;
+    @include flex-dir(row);
+    @include justify-content(space-between);
+    margin-top: 3px;
+    label {
+        width: auto;
+        @include flex-grow(1);
+    }
+}
+input {
+    @include flex-grow(1);
+    width: fill-parent;
+    margin: none;
+}
+.labeled-box {
+    @include flexbox;
+    @include flex-dir(row);
+}
+#playpause, #addrem {
+    @include center(row);
+}
+#playpause {
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+}
+.spacer {
+    width: 10px;
+}

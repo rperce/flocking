@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <title>Flocking</title>
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="js/require.js"></script>
+    <script src="js/index.js"></script>
+</head>
+<body>
+    <h1>Flocking</h1>
+    <div id="app">
+        <canvas id="draw" width="600" height="600"></canvas>
+        <div id="sidebar">
+            <div class="controls" id="add-controls">
+                <div id="playpause">
+                    <span class="fa fa-play fa-2x" id="play"></span>
+                    <span class="spacer"></span>
+                    <span class="fa fa-pause fa-2x" id="pause"></span>
+                </div>
+                <div id="addrem">
+                    <span class="fa-stack fa-lg" id="birdstack">
+                        <span class="fa fa-location-arrow fa-stack-1x" id="addbird"></span>
+                        <span class="fa fa-square-o fa-stack-2x" id="selected"></span>
+                    </span>
+                    <span class="fa-stack fa-lg" id="obsstack">
+                        <span class="fa fa-circle fa-stack-1x" id="addobs"></span>
+                    </span>
+                    <span class="fa-stack fa-lg" id="remstack">
+                        <span class="fa fa-minus fa-stack-1x" id="removething"></span>
+                    </span>
+                </div>
+                <div id="addremcontrols">
+                    <div class="labeled-box">
+                        <label for="size">Size:</label>
+                        <input type="number" min="1" max="400" step="5" value="10"
+                        id="size"></input>
+                    </div>
+                    <div id="birdcontrols">
+                        <div class="labeled-box">
+                            <label for="amount">Amount:</label>
+                            <input type="number" min="1" max="10" step="1" value="1"
+                            id="amount"></input>
+                        </div>
+                        <div class="labeled-box">
+                            <label for="heading">Heading:</label>
+                            <input type="number" min="0" max="360" step="45" value="0"
+                            id="heading"></input>
+                        </div>
+                        <div class="labeled-box" id="random-container">
+                            <label for="random">Random heading?</label>
+                            <input type="checkbox" value="random" id="random"></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="controls" id="fov">fov</div>
+            <div class="controls" id="sliders">sliders</div>
+        </div>
+    </div>
+</body>
+</html>
